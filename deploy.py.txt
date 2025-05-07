@@ -1,0 +1,19 @@
+import sagemaker
+from sagemaker.sklearn.estimator import SKLearn
+
+role = sagemaker.get_execution_role()
+sklearn_estimator = SKLearn(
+    entry_point='model/train.py',
+    role=role,
+    instance_type='ml.m5.large',
+    framework_version='0.23-1',
+    py_version='py3',
+    base_job_name='iris-model'
+)
+
+sklearn_estimator.fit()
+
+predictor = sklearn_estimator.deploy(
+    initial_instance_count=1,
+    instance_type='ml.m5.large'
+)

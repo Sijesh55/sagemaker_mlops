@@ -1,0 +1,8 @@
+from sagemaker.predictor import Predictor
+
+# Replace this with your endpoint name
+predictor = Predictor(endpoint_name='iris-model-YYYY-MM-DD-HH-MM-SS')
+
+test_data = [[5.1, 3.5, 1.4, 0.2]]
+prediction = predictor.predict(test_data)
+print("Prediction:", prediction)
