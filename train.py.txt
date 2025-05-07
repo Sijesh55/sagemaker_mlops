@@ -1,0 +1,13 @@
+import os
+import joblib
+from sklearn.datasets import load_iris
+from sklearn.ensemble import RandomForestClassifier
+
+def model_fn():
+    X, y = load_iris(return_X_y=True)
+    model = RandomForestClassifier()
+    model.fit(X, y)
+    joblib.dump(model, os.path.join(os.environ.get('SM_MODEL_DIR', '.'), 'model.joblib'))
+
+if _name_ == "_main_":
+    model_fn()
